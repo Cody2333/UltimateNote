@@ -1,0 +1,15 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="base_margin">8dp</dimen>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="actionbar_ic_margin">24dp</dimen>
+    <dimen name="actionbar_btn_size">24dp</dimen>
+    <dimen name="actionbar_height">56dp</dimen>
+    <dimen name="bottombar_btn_size">36dp</dimen>
+    <dimen name="bottombar_height">80dp</dimen>
+    <dimen name="bottombar_btn_vertical_margin">56dp</dimen>
+    <dimen name="default_img_size">300dp</dimen>
+    <dimen name="card_view_img_width">80dp</dimen>
+    <dimen name="card_view_text_width">240dp</dimen>
+</resources>

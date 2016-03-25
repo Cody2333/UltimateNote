@@ -1,0 +1,38 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" tools:context="com.mlzc.imagenote.activity.EditActivity">
+
+    <item
+        android:id="@+id/menu_photo"
+        android:icon="@drawable/ic_photo_white"
+        android:title=""
+        app:showAsAction="always">
+        <menu>
+            <group>
+                <item
+                    android:id="@+id/menu_photo_gallery"
+                    android:title="相册"
+                    />
+            </group>
+        </menu>
+    </item>
+
+    <item
+        android:id="@+id/menu_tag"
+        android:icon="@drawable/ic_tag_white"
+        android:title=""
+        app:showAsAction="always">
+    </item>
+
+    <item
+        android:id="@+id/menu_return"
+        android:icon="@drawable/ic_return_white"
+        android:title=""
+        app:showAsAction="always"
+        />
+    <!--
+        Refresh action item which should be presented in the Action Bar's overflow area
+        by setting showAsAction='never'. This is so that users which are not using touch input
+        can still perform a refresh.
+    -->
+</menu>

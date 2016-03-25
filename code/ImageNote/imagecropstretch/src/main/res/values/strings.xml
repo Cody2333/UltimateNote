@@ -1,0 +1,4 @@
+<resources>
+    <string name="crop_dialog_title">Cropping</string>
+    <string name="crop_dialog_content">saving image...</string>
+</resources>

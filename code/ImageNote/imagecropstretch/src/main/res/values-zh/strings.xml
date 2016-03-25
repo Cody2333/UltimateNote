@@ -1,0 +1,4 @@
+<resources>
+    <string name="crop_dialog_title">裁剪</string>
+    <string name="crop_dialog_content">保存图像中...</string>
+</resources>

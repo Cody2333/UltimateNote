@@ -1,0 +1,95 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:paddingTop="0dp"
+    android:paddingBottom="0dp"
+    tools:context="com.mlzc.imagenote.activity.EditPhotoActivity"
+    android:background="@color/background_material_dark">
+
+    <ImageButton
+        android:layout_width="@dimen/actionbar_height"
+        android:layout_height="@dimen/actionbar_height"
+        android:id="@+id/check_btn"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="false"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/crop_selectable_background"
+        android:onClick="onCheckClick"
+        android:src="@drawable/ic_check_white" />
+
+    <ImageButton
+        android:layout_width="@dimen/actionbar_height"
+        android:layout_height="@dimen/actionbar_height"
+        android:id="@+id/return_btn"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/crop_selectable_background"
+        android:onClick="onReturnClick"
+        android:src="@drawable/ic_return_white" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/actionbar_height"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/linearLayout">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/actionbar_height"
+            android:id="@+id/ocr_btn"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:background="@drawable/crop_selectable_background"
+            android:onClick="onOcrClick"
+            android:src="@drawable/ic_ocr_white"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/actionbar_height"
+            android:id="@+id/crop_btn"
+            android:src="@drawable/ic_crop_white"
+            android:background="@drawable/crop_selectable_background"
+            android:layout_weight="1"
+            android:onClick="onCropClick" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/scrollView2"
+        android:layout_above="@+id/linearLayout"
+        android:layout_below="@+id/check_btn">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/default_img_size"
+                android:id="@+id/image_view"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:layout_marginRight="@dimen/activity_vertical_margin" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/edit_text"
+                android:background="@null"
+                android:textColor="@color/background_material_light"
+                android:textCursorDrawable="@color/background_material_light"
+                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:layout_marginRight="@dimen/activity_vertical_margin" />
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

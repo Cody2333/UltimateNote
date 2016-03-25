@@ -1,2 +1,3 @@
-# UltimateNote
-repo for android app UltimateNote
+嵌入式项目--UltimateNote
+=====================================================
+一个云笔记app(提供ocr 文字识别 和 语音识别)

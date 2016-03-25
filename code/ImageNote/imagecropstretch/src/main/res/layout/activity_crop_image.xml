@@ -1,0 +1,83 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:paddingTop="0dp"
+    android:paddingBottom="0dp" tools:context=".CropImageActivity">
+
+    <view
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        class="com.abucraft.imagecropstretch.CropImageView"
+        android:id="@+id/view"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="false"
+        android:background="@color/background_material_dark" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/actionbar_height">
+
+        <ImageButton
+            android:layout_width="@dimen/actionbar_height"
+            android:layout_height="@dimen/actionbar_height"
+            android:id="@+id/check_btn"
+            android:layout_alignParentStart="false"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/ic_check_white"
+            android:background="@drawable/crop_selectable_background"
+            android:onClick="onCheckClick" />
+
+        <ImageButton
+            android:layout_width="@dimen/actionbar_height"
+            android:layout_height="@dimen/actionbar_height"
+            android:id="@+id/return_btn"
+            android:layout_alignParentEnd="false"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/ic_return_white"
+            android:background="@drawable/crop_selectable_background"
+            android:onClick="onReturnClick"
+            android:nestedScrollingEnabled="false" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/actionbar_height"
+        android:layout_gravity="center_horizontal|bottom">
+
+        <ImageButton
+            android:layout_width="@dimen/btn_size"
+            android:layout_height="match_parent"
+            android:id="@+id/main_rotate_btn"
+            android:src="@drawable/ic_rotate_90_degrees_ccw_white"
+            android:layout_weight="1"
+            android:background="@drawable/crop_selectable_background"
+            android:onClick="onRotateClick" />
+
+        <ImageButton
+            android:layout_width="@dimen/btn_size"
+            android:layout_height="match_parent"
+            android:id="@+id/main_crop_btn"
+            android:src="@drawable/ic_crop_white"
+            android:layout_weight="1"
+            android:background="@drawable/crop_selectable_background"
+            android:onClick="onCropClick" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/main_stretch_btn"
+            android:layout_weight="1"
+            android:src="@drawable/ic_stretch_crop_white"
+            android:background="@drawable/crop_selectable_background"
+            android:onClick="onStretchClick" />
+    </LinearLayout>
+
+</FrameLayout>
+

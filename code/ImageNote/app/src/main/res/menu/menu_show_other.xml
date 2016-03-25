@@ -1,0 +1,13 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" tools:context="com.mlzc.imagenote.activity.ShowActivity">
+
+
+    <item
+        android:id="@+id/save_to_local"
+        android:icon="@drawable/ic_get_app_white_24dp"
+        android:title=""
+        app:showAsAction="always">
+    </item>
+
+</menu>

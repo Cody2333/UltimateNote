@@ -1,7 +1,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" tools:context="com.mlzc.imagenote.activity.EditActivity">
-
+    <item
+        android:id="@+id/menu_audio"
+        android:icon="@drawable/ic_tag_white"
+        android:title=""
+        app:showAsAction="always">
+    </item>
     <item
         android:id="@+id/menu_photo"
         android:icon="@drawable/ic_photo_white"

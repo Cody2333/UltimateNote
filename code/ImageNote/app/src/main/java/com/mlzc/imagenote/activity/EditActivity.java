@@ -2,6 +2,7 @@ package com.mlzc.imagenote.activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,6 +12,8 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.speech.RecognitionListener;
+import android.speech.SpeechRecognizer;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -18,6 +21,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.format.Time;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -30,10 +34,18 @@ import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.Toast;
 
+import com.baidu.speech.VoiceRecognitionService;
+import com.dxjia.library.BaiduVoiceHelper;
+import com.mlzc.imagenote.Constant;
 import com.mlzc.imagenote.R;
 import com.mlzc.imagenote.entity.Note;
 import com.mlzc.imagenote.fragment.NoteFragment;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -48,9 +60,9 @@ import java.util.Date;
 import java.util.List;
 
 
-public class EditActivity extends AppCompatActivity {
-    static final int GET_IMAGE_FROM_OTHER = 1;
-    static final int GET_OCR_RESULT = 2;
+public class EditActivity extends AppCompatActivity implements RecognitionListener{
+    static final int GET_IMAGE_FROM_OTHER = 11;
+    static final int GET_OCR_RESULT = 12;
     private long cTime;
     private long rTime;
     private EditText editText;
@@ -59,7 +71,7 @@ public class EditActivity extends AppCompatActivity {
     private Uri resultUri;
     private boolean cloudNote;
     private Context context;
-
+    private SpeechRecognizer speechRecognizer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,10 +99,93 @@ public class EditActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
+    public void onReadyForSpeech(Bundle params) {
+
     }
 
+    @Override
+    public void onBeginningOfSpeech() {
+
+    }
+
+    @Override
+    public void onRmsChanged(float rmsdB) {
+
+    }
+
+    @Override
+    public void onBufferReceived(byte[] buffer) {
+
+    }
+
+    @Override
+    public void onEndOfSpeech() {
+
+    }
+
+    @Override
+    public void onError(int error) {
+
+    }
+
+    @Override
+    public void onResults(Bundle results) {
+        ArrayList<String> nbest = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+        String json_res = results.getString("origin_result");
+        //get selected text
+        ViewGroup group = ((ViewGroup) findViewById(R.id.noteGroup));
+        EditText selectedText = (EditText) group.findFocus();
+        if (selectedText == null) {
+            selectedText = (EditText) group.getChildAt(0);
+            selectedText.setSelection(0);
+        }
+        int i = 0;
+        for (; i < group.getChildCount(); ++i) {
+            if (selectedText == group.getChildAt(i))
+                break;
+        }
+        EditText editText = (EditText) group.getChildAt(i);
+        JSONObject jsonObject = null;
+        try{
+            jsonObject = new JSONObject(json_res);
+            JSONArray items = jsonObject.getJSONObject("content").getJSONArray("item");
+            String itemStr = (String)items.get(0);
+            Toast.makeText(EditActivity.this, itemStr, Toast.LENGTH_SHORT).show();
+            editText.append(itemStr);
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+
+
+    }
+
+    @Override
+    public void onPartialResults(Bundle partialResults) {
+
+    }
+
+    @Override
+    public void onEvent(int eventType, Bundle params) {
+
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this, new ComponentName(this, VoiceRecognitionService.class));
+        speechRecognizer.setRecognitionListener(this);
+    }
+
+    public void bindParams(Intent intent) {
+
+    }
+
+    private void startRecongnize() {
+        Intent intent = new Intent();
+        bindParams(intent);
+        Log.i("audio recongnize", "start listening");
+        BaiduVoiceHelper.startBaiduVoiceDialogForResult(EditActivity.this,
+                Constant.BAI_DU_DEMO_APIKEY, Constant.BAI_DU_DEMO_SECRET, Constant.REQUEST_UI);
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_edit, menu);
@@ -105,6 +200,9 @@ public class EditActivity extends AppCompatActivity {
         }
 
         switch (item.getItemId()) {
+            case R.id.menu_audio:
+                startRecongnize();
+                break;
             case android.R.id.home:
                 //save button
                 Long newTime = saveNote();
@@ -165,6 +263,9 @@ public class EditActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode!=GET_IMAGE_FROM_OTHER && requestCode !=GET_OCR_RESULT) {
+            onResults(data.getExtras());
+        }else
         if(requestCode==GET_IMAGE_FROM_OTHER) {
             if(data!=null) {
                 Uri imgData = data.getData();

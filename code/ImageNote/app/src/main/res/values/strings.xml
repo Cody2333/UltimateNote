@@ -19,17 +19,20 @@
     <string name="dialog_save_image">save image</string>
     <string name="dialog_save_text">save text</string>
     <string name="dialog_save_image_text">save image and text</string>
-
+    <string name="edit_profile">edit profile</string>
     <string name="user_setting">User Setting</string>
     <string name="log_out">log out</string>
     <string name="other">other</string>
     <string name="license">licences</string>
     <string name="search_hint">input the note title or tags</string>
     <string name="delete_local_cloud_note">delete local cloud note</string>
-<!-- TODO: Remove or change this placeholder text -->
+    <string name="nav_settings">Userpage</string>
+    <string name="user_page">user_page</string>
+    <!-- TODO: Remove or change this placeholder text -->
 
     <string name="title_activity_setting">settingActivity</string>
     <string name="title_activity_license">LicenseActivity</string>
     <string name="title_activity_searchable">SearchableActivity</string>
     <string name="load">loading</string>
+    <string name="title_activity_edit_profile">edit_profile</string>
 </resources>

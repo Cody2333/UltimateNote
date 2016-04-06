@@ -1,7 +1,6 @@
 package com.mlzc.imagenote.activity;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
@@ -29,6 +28,13 @@ public class SettingActivity extends ActionBarActivity {
         final ActionBar ab = getSupportActionBar();
         ab.setHomeAsUpIndicator(R.drawable.ic_back_white);
         ab.setDisplayHomeAsUpEnabled(true);
+
+        findViewById(R.id.edit_file).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SettingActivity.this,EditProfileActivity.class) );
+            }
+        });
 
     }
 
@@ -74,6 +80,9 @@ public class SettingActivity extends ActionBarActivity {
                     }).show();
         }
     }
+
+
+
 
     public void onLicense(View view) {
         Intent intent = new Intent(this, LicenseActivity.class);

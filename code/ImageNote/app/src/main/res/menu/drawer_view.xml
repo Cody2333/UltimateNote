@@ -6,8 +6,8 @@
             android:id="@+id/nav_synchronize"
             android:title="@string/btn_synchronize_note" />
         <item
-            android:id="@+id/nav_setting"
-            android:title="@string/btn_setting" />
+            android:id="@+id/nav_settings"
+            android:title="@string/nav_settings" />
     </group>
 
 </menu>

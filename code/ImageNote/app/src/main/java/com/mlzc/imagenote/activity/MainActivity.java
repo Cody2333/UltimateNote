@@ -202,6 +202,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    //这部分是点击主界面左上方按钮后弹出的菜单的事件
     private void setupDrawerContent(NavigationView navigationView) {
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
@@ -210,7 +211,7 @@ public class MainActivity extends AppCompatActivity {
                         menuItem.setChecked(true);
                         mDrawerLayout.closeDrawers();
                         switch (menuItem.getItemId()) {
-                            case R.id.nav_synchronize:
+                            case R.id.nav_synchronize:     //synchronize同步界面
                                 AVUser user = AVUser.getCurrentUser();
                                 if (user == null) {
                                     new AlertDialog.Builder(context)
@@ -247,7 +248,7 @@ public class MainActivity extends AppCompatActivity {
                                     }).start();
                                 }
                                 break;
-                            case R.id.nav_setting:
+                            case R.id.nav_settings:     //弹出用户界面
                                 Intent intent = new Intent(MainActivity.this, SettingActivity.class);
                                 startActivityForResult(intent, GET_SETTING_INFO);
                                 break;
@@ -273,7 +274,7 @@ public class MainActivity extends AppCompatActivity {
                 String userEmail = data.getStringExtra("USER_EMAIL");
                 if (userEmail != null) {
                     navHeadText.setText(userEmail);
-                    navHeadText.setOnClickListener(null);
+                    navHeadText.setOnClickListener(null);   //修改,点击邮箱或者图片都链接到userPage
                 }
             }
         } else if (requestCode == GET_SETTING_INFO) {

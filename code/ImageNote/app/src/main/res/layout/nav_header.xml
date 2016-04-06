@@ -9,11 +9,21 @@
     android:orientation="vertical"
     android:gravity="bottom">
 
+
+    <ImageView
+        android:id="@+id/dynamic_item_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/unlog"
+        android:scaleType="center"
+         />
+
     <TextView
         android:id="@+id/nav_header_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Username"
+        android:textSize="20sp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 
 </LinearLayout>

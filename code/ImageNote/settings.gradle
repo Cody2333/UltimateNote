@@ -1,1 +1,1 @@
-include ':app', ':imagecropstretch'
+include ':app', ':imagecropstretch', ':pooredit'

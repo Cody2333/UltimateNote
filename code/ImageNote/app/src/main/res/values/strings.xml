@@ -35,4 +35,8 @@
     <string name="title_activity_searchable">SearchableActivity</string>
     <string name="load">loading</string>
     <string name="title_activity_edit_profile">edit_profile</string>
+
+    <string name="nav_quitlogin">logout</string>
+    <string name="nav_about">about</string>
+    <string name="nav_setting">setting</string>
 </resources>

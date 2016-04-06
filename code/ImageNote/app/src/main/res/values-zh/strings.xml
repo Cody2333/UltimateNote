@@ -29,4 +29,8 @@
     <string name="title_activity_setting">设置</string>
     <string name="title_activity_license">开源许可证</string>
     <string name="title_activity_searchable">搜索</string>
+    <string name="nav_quitlogin">退出登录</string>
+    <string name="nav_about">关于软件</string>
+    <string name="nav_setting">设置</string>
+
 </resources>

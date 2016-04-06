@@ -4,10 +4,21 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_synchronize"
+            android:icon="@drawable/ic_wb_cloudy_gray_24dp"
             android:title="@string/btn_synchronize_note" />
+
         <item
             android:id="@+id/nav_settings"
-            android:title="@string/nav_settings" />
+            android:icon="@android:drawable/ic_menu_manage"
+            android:title="@string/nav_setting" />
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@android:drawable/ic_menu_info_details"
+            android:title="@string/nav_about" />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@android:drawable/ic_menu_close_clear_cancel"
+            android:title="@string/nav_quitlogin" />
     </group>
 
 </menu>

@@ -1,23 +1,16 @@
 package com.mlzc.imagenote.activity;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Application;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.media.Image;
 import android.os.AsyncTask;
-import android.os.Handler;
-import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -29,14 +22,11 @@ import android.support.v7.app.ActionBar;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -47,18 +37,11 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.avos.avoscloud.AVException;
-import com.avos.avoscloud.AVOSCloud;
-import com.avos.avoscloud.AVObject;
-import com.avos.avoscloud.AVQuery;
 import com.avos.avoscloud.AVUser;
-import com.avos.avoscloud.FindCallback;
 import com.mlzc.imagenote.MyApplication;
 import com.mlzc.imagenote.R;
 import com.mlzc.imagenote.entity.Note;
-import com.mlzc.imagenote.fragment.CloudNoteFragment;
 import com.mlzc.imagenote.fragment.NoteFragment;
-import com.mlzc.imagenote.fragment.OtherNoteFragment;
 import com.mlzc.imagenote.utils.ImageUtil;
 import com.mlzc.imagenote.utils.ViewUtil;
 import com.mlzc.imagenote.views.CircleTransformation;
@@ -68,7 +51,6 @@ import com.squareup.picasso.Picasso;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.internal.ButterKnifeProcessor;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -77,19 +59,17 @@ public class MainActivity extends AppCompatActivity {
     protected static final int CREATE_NEW_NOTE = 2;
     public static final int SHOW_NOTE = 3;
     public static final int SHOW_OTHER_NOTE = 4;
-    private static final int OTHER_NOTE = 0;
     public static final String NOTE_REVISED = "NOTE_REVISED";
     public static final String TIME = "TIME";
     public static final String C_TIME = "C_TIME";
     public static final String USER_NAME = "USER_NAME";
     private Dialog waitDialog;
     private List<Note> notes;
-    private List<Note> otherNotes;
     private NoteFragment selfNoteFragment;
-    private CloudNoteFragment cloudNoteFragment;
     private static Adapter mAdapter;
     private AsyncTask task;
-    private static ViewPager mViewPager;
+    @Bind(R.id.vp)
+    ViewPager mViewPager;
     @Bind(R.id.nav_email)
     TextView navHeadText;
     @Bind(R.id.nav_icon)
@@ -110,22 +90,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         context = this;
-        //第一次运行时初始化操作
-        initFile();
+        initForFirstRun();
+        initView();
+        initListener();
+        setFragment();
+    }
 
-
-        setSupportActionBar(toolbar);
-
-        //初始化ActionBar
-        final ActionBar ab = getSupportActionBar();
-        if (ab != null) {
-            ab.setHomeAsUpIndicator(R.drawable.ic_show_bar_white);
-            ab.setDisplayHomeAsUpEnabled(true);
-        }
-
-        if (navigationView != null) {
-            setupDrawerContent(navigationView);
-        }
+    private void initListener() {
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,10 +104,18 @@ public class MainActivity extends AppCompatActivity {
                 onActivityAddNote(view);
             }
         });
+    }
 
+    private void initView() {
+        setSupportActionBar(toolbar);
+        //初始化ActionBar
+        final ActionBar ab = getSupportActionBar();
+        if (ab != null) {
+            ab.setHomeAsUpIndicator(R.drawable.ic_show_bar_white);
+            ab.setDisplayHomeAsUpEnabled(true);
+        }
+        setupDrawerContent(navigationView);
         AVUser currentUser = AVUser.getCurrentUser();
-
-
         //如果用户名为空，设置navHeadText为点击登录，并设置跳转到LoginActivity的监听器
         if (currentUser == null) {
             navHeadText.setText("点击登录");
@@ -155,19 +134,16 @@ public class MainActivity extends AppCompatActivity {
                     .Builder(MyApplication.getInstance())
                     .downloader(new OkHttpDownloader(new OkHttpClient()))
                     .build();
-            picasso.load(ImageUtil.getAvatarUrl("wangkedi.wang@gmail.com", 100))
+            picasso.load(ImageUtil.getAvatarUrl(currentUser.getUsername(), 100))
                     .config(Bitmap.Config.RGB_565)
                     .resize(ViewUtil.dp2px(100), ViewUtil.dp2px(100))
                     .centerCrop()
                     .transform(new CircleTransformation())
                     .into(headerImage);
         }
-
-        mViewPager = (ViewPager) findViewById(R.id.vp);
-        setFragment();
     }
 
-    private void initFile() {
+    private void initForFirstRun() {
         //create directory
         String filePath = this.getFilesDir().getAbsolutePath();
         File dir = new File(filePath + "/noteList");
@@ -220,8 +196,9 @@ public class MainActivity extends AppCompatActivity {
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 return true;
             case R.id.menu_search:
-                Intent intent = new Intent(this, SearchableActivity.class);
-                startActivityForResult(intent, SHOW_OTHER_NOTE);
+                //TODO
+                //Intent intent = new Intent(this, SearchableActivity.class);
+                //startActivityForResult(intent, SHOW_OTHER_NOTE);
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -423,9 +400,7 @@ public class MainActivity extends AppCompatActivity {
         if (mViewPager != null) {
             mAdapter = new Adapter(getSupportFragmentManager());
             notes = new ArrayList<>();
-            otherNotes = new ArrayList<>();
             selfNoteFragment = new NoteFragment();
-            cloudNoteFragment = new CloudNoteFragment();
 
             //get note list of self
             try {
@@ -474,7 +449,6 @@ public class MainActivity extends AppCompatActivity {
             }
 
             selfNoteFragment.setNoteList(notes);
-            cloudNoteFragment.setNoteList(otherNotes);
             mAdapter.addFragment(selfNoteFragment, "我的笔记");
             mViewPager.setAdapter(mAdapter);
             mTabLayout.setupWithViewPager(mViewPager);

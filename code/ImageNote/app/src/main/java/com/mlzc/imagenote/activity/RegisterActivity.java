@@ -1,5 +1,6 @@
 package com.mlzc.imagenote.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -26,6 +27,7 @@ import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.RequestEmailVerifyCallback;
 import com.avos.avoscloud.SignUpCallback;
 import com.mlzc.imagenote.R;
+import com.mlzc.imagenote.utils.ProgressDialogUtil;
 
 /**
  * Created by Administrator on 2015-7-17.
@@ -33,12 +35,13 @@ import com.mlzc.imagenote.R;
 public class RegisterActivity extends ActionBarActivity {
     private boolean isProcessing;
 
-
+    Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         isProcessing = false;
+        context = this;
     }
 
     @Override
@@ -134,8 +137,10 @@ public class RegisterActivity extends ActionBarActivity {
         user.setUsername(email);
         user.setPassword(password);
         user.setEmail(email);
+        ProgressDialogUtil.progressDialogShow(context);
         user.signUpInBackground(new SignUpCallback() {
             public void done(AVException e) {
+                ProgressDialogUtil.progressDialogDismiss();
                 if (e == null) {
                     AVUser.requestEmailVerfiyInBackground(email, new RequestEmailVerifyCallback() {
                         @Override

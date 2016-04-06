@@ -264,6 +264,10 @@ public class MainActivity extends AppCompatActivity {
                                 break;
                             default:
                                 break;
+
+                            case R.id.nav_logout:
+                                AVUser.logOut();
+                                turnToLogin();
                         }
 
                         return true;

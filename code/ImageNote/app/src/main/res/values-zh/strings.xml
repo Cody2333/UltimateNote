@@ -33,4 +33,9 @@
     <string name="nav_about">关于软件</string>
     <string name="nav_setting">系统设置</string>
 
+    <string name="dialog_message_title">提示</string>
+    <string name="dialog_message_success">成功</string>
+    <string name="dialog_text_wait">请等待</string>
+    <string name="dialog_error_title">错误</string>
+
 </resources>

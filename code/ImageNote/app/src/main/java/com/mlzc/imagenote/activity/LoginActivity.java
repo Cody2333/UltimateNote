@@ -1,11 +1,13 @@
 package com.mlzc.imagenote.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 
 import android.app.AlertDialog;
@@ -17,6 +19,7 @@ import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.LogInCallback;
 import com.avos.avoscloud.RequestPasswordResetCallback;
 import com.mlzc.imagenote.R;
+import com.mlzc.imagenote.utils.ProgressDialogUtil;
 
 public class LoginActivity extends ActionBarActivity {
     public static final int LOGIN_SUCCESS=1;
@@ -25,11 +28,13 @@ public class LoginActivity extends ActionBarActivity {
     public static final String USER_EMAIL="USER_EMAIL";
     private String email;
     private boolean isProcessing;
+    Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         isProcessing = false;
+        context =this;
     }
 
     @Override
@@ -110,7 +115,7 @@ public class LoginActivity extends ActionBarActivity {
             return;
         isProcessing = true;
         EditText inputEmail;
-        inputEmail = (EditText)findViewById(R.id.email_input);
+        inputEmail = (AutoCompleteTextView)findViewById(R.id.email_input);
         email = inputEmail.getText().toString();
         EditText inputPassword;
         inputPassword= (EditText)findViewById(R.id.password_input);
@@ -118,8 +123,10 @@ public class LoginActivity extends ActionBarActivity {
         if(email.equals("") || password.equals("")) {
             fail();
         } else {
+            ProgressDialogUtil.progressDialogShow(context);
             AVUser.logInInBackground(email, password, new LogInCallback() {
                 public void done(AVUser user, AVException e) {
+                    ProgressDialogUtil.progressDialogDismiss();
                     if (e == null) {
                         if (user != null) {
                             success(); // 登录成功
@@ -139,8 +146,10 @@ public class LoginActivity extends ActionBarActivity {
         EditText inputEmail;
         inputEmail = (EditText)findViewById(R.id.email_input);
         String email = inputEmail.getText().toString();
+        ProgressDialogUtil.progressDialogShow(context);
         AVUser.requestPasswordResetInBackground(email, new RequestPasswordResetCallback() {
             public void done(AVException e) {
+                ProgressDialogUtil.progressDialogDismiss();
                 if (e == null) {
                     sendMessage(); // 已发送一份重置密码的指令到用户的邮箱
                 } else {

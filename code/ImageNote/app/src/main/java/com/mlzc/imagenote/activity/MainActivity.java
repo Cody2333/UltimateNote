@@ -2,13 +2,16 @@ package com.mlzc.imagenote.activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Application;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
@@ -31,6 +34,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,11 +53,22 @@ import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
 import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.FindCallback;
+import com.mlzc.imagenote.MyApplication;
 import com.mlzc.imagenote.R;
 import com.mlzc.imagenote.entity.Note;
 import com.mlzc.imagenote.fragment.CloudNoteFragment;
 import com.mlzc.imagenote.fragment.NoteFragment;
 import com.mlzc.imagenote.fragment.OtherNoteFragment;
+import com.mlzc.imagenote.utils.ImageUtil;
+import com.mlzc.imagenote.utils.ViewUtil;
+import com.mlzc.imagenote.views.CircleTransformation;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.picasso.OkHttpDownloader;
+import com.squareup.picasso.Picasso;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.internal.ButterKnifeProcessor;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -75,16 +90,84 @@ public class MainActivity extends AppCompatActivity {
     private static Adapter mAdapter;
     private AsyncTask task;
     private static ViewPager mViewPager;
+    @Bind(R.id.nav_email)
     TextView navHeadText;
+    @Bind(R.id.nav_icon)
+    ImageView headerImage;
+    @Bind(R.id.drawer_layout)
     DrawerLayout mDrawerLayout;
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
+    @Bind(R.id.nav_view)
+    NavigationView navigationView;
+    @Bind(R.id.fab)
+    FloatingActionButton fab;
     Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        ButterKnife.bind(this);
         context = this;
+        //第一次运行时初始化操作
+        initFile();
+
+
+        setSupportActionBar(toolbar);
+
+        //初始化ActionBar
+        final ActionBar ab = getSupportActionBar();
+        if (ab != null) {
+            ab.setHomeAsUpIndicator(R.drawable.ic_show_bar_white);
+            ab.setDisplayHomeAsUpEnabled(true);
+        }
+
+        if (navigationView != null) {
+            setupDrawerContent(navigationView);
+        }
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onActivityAddNote(view);
+            }
+        });
+
+        AVUser currentUser = AVUser.getCurrentUser();
+
+
+        //如果用户名为空，设置navHeadText为点击登录，并设置跳转到LoginActivity的监听器
+        if (currentUser == null) {
+            navHeadText.setText("点击登录");
+            navHeadText.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    turnToLogin();
+                }
+            });
+        } else {
+            //设置navHeadText为用户名
+            navHeadText.setText(currentUser.getUsername());
+
+            //异步获取头像图片并调整分辨率
+            Picasso picasso = new Picasso
+                    .Builder(MyApplication.getInstance())
+                    .downloader(new OkHttpDownloader(new OkHttpClient()))
+                    .build();
+            picasso.load(ImageUtil.getAvatarUrl("wangkedi.wang@gmail.com", 100))
+                    .config(Bitmap.Config.RGB_565)
+                    .resize(ViewUtil.dp2px(100), ViewUtil.dp2px(100))
+                    .centerCrop()
+                    .transform(new CircleTransformation())
+                    .into(headerImage);
+        }
+
+        mViewPager = (ViewPager) findViewById(R.id.vp);
+        setFragment();
+    }
+
+    private void initFile() {
         //create directory
         String filePath = this.getFilesDir().getAbsolutePath();
         File dir = new File(filePath + "/noteList");
@@ -117,64 +200,6 @@ public class MainActivity extends AppCompatActivity {
             //to ensure file extracting succeed
             checkDir.mkdirs();
         }
-
-        //navHeadText是左侧导航栏显示用户名的TextView
-        navHeadText = (TextView) findViewById(R.id.nav_header_text);
-
-
-        //初始化toolbar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        //初始化ActionBar
-        final ActionBar ab = getSupportActionBar();
-        if (ab != null) {
-            ab.setHomeAsUpIndicator(R.drawable.ic_show_bar_white);
-            ab.setDisplayHomeAsUpEnabled(true);
-        }
-
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-
-        //初始化navigationView
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        if (navigationView != null) {
-            setupDrawerContent(navigationView);
-        }
-
-        //初始化float_btn
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onActivityAddNote(view);
-            }
-        });
-        //fab.setRippleColor(Color.parseColor("#ffab00"));
-
-        //获取用户登录信息
-        SharedPreferences settings = this.getPreferences(Activity.MODE_PRIVATE);
-
-        boolean isLogin = false;
-        AVUser currentUser = AVUser.getCurrentUser();
-        if (currentUser != null) {
-            isLogin = true;
-        }
-
-        //如果用户名为空，设置navHeadText为点击登录，并设置跳转到LoginActivity的监听器
-        if (!isLogin) {
-            navHeadText.setText("点击登录");
-            navHeadText.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    turnToLogin();
-                }
-            });
-        }//如果用户名不为空，则设置navHeadText为用户名
-        else {
-            navHeadText.setText(currentUser.getUsername());
-        }
-        mViewPager = (ViewPager) findViewById(R.id.vp);
-        setFragment();
     }
 
     @Override
@@ -195,7 +220,7 @@ public class MainActivity extends AppCompatActivity {
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 return true;
             case R.id.menu_search:
-                Intent intent = new Intent(this,SearchableActivity.class);
+                Intent intent = new Intent(this, SearchableActivity.class);
                 startActivityForResult(intent, SHOW_OTHER_NOTE);
                 return true;
         }
@@ -327,15 +352,13 @@ public class MainActivity extends AppCompatActivity {
                                 fis2.read(b2);
                                 fis2.close();
                                 String describe = new String(b2, "utf-8");
-                                if(describe.charAt(0) == 'P') {
+                                if (describe.charAt(0) == 'P') {
                                     note.setCloudNote(true);
                                     note.setIsPublic(true);
-                                }
-                                else if (describe.charAt(0) == 'Y') {
+                                } else if (describe.charAt(0) == 'Y') {
                                     note.setCloudNote(true);
                                     note.setIsPublic(false);
-                                }
-                                else {
+                                } else {
                                     note.setCloudNote(false);
                                     note.setIsPublic(false);
                                 }
@@ -431,15 +454,13 @@ public class MainActivity extends AppCompatActivity {
                         fis2.read(b2);
                         fis2.close();
                         String describe = new String(b2, "utf-8");
-                        if(describe.charAt(0) == 'P') {
+                        if (describe.charAt(0) == 'P') {
                             note.setCloudNote(true);
                             note.setIsPublic(true);
-                        }
-                        else if (describe.charAt(0) == 'Y') {
+                        } else if (describe.charAt(0) == 'Y') {
                             note.setCloudNote(true);
                             note.setIsPublic(false);
-                        }
-                        else {
+                        } else {
                             note.setCloudNote(false);
                             note.setIsPublic(false);
                         }
@@ -455,7 +476,6 @@ public class MainActivity extends AppCompatActivity {
             selfNoteFragment.setNoteList(notes);
             cloudNoteFragment.setNoteList(otherNotes);
             mAdapter.addFragment(selfNoteFragment, "我的笔记");
-            mAdapter.addFragment(cloudNoteFragment, "动态");
             mViewPager.setAdapter(mAdapter);
             mTabLayout.setupWithViewPager(mViewPager);
         }
@@ -518,6 +538,8 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
     }
+
+
 }
 
 

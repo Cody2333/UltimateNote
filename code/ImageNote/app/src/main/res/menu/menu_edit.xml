@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools" tools:context="com.mlzc.imagenote.activity.EditActivity">
     <item
         android:id="@+id/menu_audio"
-        android:icon="@drawable/ic_tag_white"
+        android:icon="@drawable/ic_btn_speak_now_white"
         android:title=""
         app:showAsAction="always">
     </item>

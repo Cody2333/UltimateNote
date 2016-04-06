@@ -38,4 +38,7 @@ public class Constant {
 
     public static final String VAD_SEARCH = "search";
     public static final String VAD_INPUT = "input";
+
+    public static final int RIGHT = 500;
+    public static final int LEFT = 501;
 }

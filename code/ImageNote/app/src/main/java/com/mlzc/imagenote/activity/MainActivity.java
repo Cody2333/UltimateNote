@@ -23,8 +23,10 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -39,6 +41,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.avos.avoscloud.AVUser;
+import com.mlzc.imagenote.Constant;
 import com.mlzc.imagenote.MyApplication;
 import com.mlzc.imagenote.R;
 import com.mlzc.imagenote.entity.Note;
@@ -95,8 +98,8 @@ public class MainActivity extends AppCompatActivity {
         initView();
         initListener();
         setFragment();
-    }
 
+    }
     private void initListener() {
 
         fab.setOnClickListener(new View.OnClickListener() {

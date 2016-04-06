@@ -20,6 +20,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -114,6 +115,10 @@ public class MainActivity extends AppCompatActivity {
             ab.setHomeAsUpIndicator(R.drawable.ic_show_bar_white);
             ab.setDisplayHomeAsUpEnabled(true);
         }
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        mDrawerLayout.setDrawerListener(toggle);
+        toggle.syncState();
         setupDrawerContent(navigationView);
         AVUser currentUser = AVUser.getCurrentUser();
         //如果用户名为空，设置navHeadText为点击登录，并设置跳转到LoginActivity的监听器

@@ -68,7 +68,6 @@ public class ShowOtherActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = this;
-        AVOSCloud.initialize(this, "lcy5obrtu60bsehe0qg12vkintievhj4atx4j4cfwqd16r4g", "wstiszidqlw5muuqpfpera5d0d6ryotz04tdlfebv0ukt34g");
         setContentView(R.layout.activity_show_other);
 
         //初始化toolbar

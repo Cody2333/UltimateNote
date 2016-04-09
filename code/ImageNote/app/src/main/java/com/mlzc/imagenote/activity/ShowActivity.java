@@ -27,9 +27,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
@@ -45,6 +48,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 
 public class ShowActivity extends ActionBarActivity {
     public final static int EDIT_NOTE = 1;
@@ -57,18 +63,20 @@ public class ShowActivity extends ActionBarActivity {
     private ArrayList<String> tagsArray;
     Context context;
     private Dialog waitDialog;
+    @Bind (R.id.toolbar)
+    Toolbar toolbar;
+    @Bind(R.id.viewlayout)
+    RelativeLayout relativeLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = this;
         setContentView(R.layout.activity_show);
-
+        ButterKnife.bind(this);
         //初始化toolbar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
         //初始化ActionBar
         final ActionBar ab = getSupportActionBar();
         ab.setHomeAsUpIndicator(R.drawable.ic_back_white);
@@ -88,6 +96,14 @@ public class ShowActivity extends ActionBarActivity {
         cTime = intent.getLongExtra(MainActivity.C_TIME, 0);
         rTime = intent.getLongExtra(MainActivity.TIME, 0);
         initNote(rTime);
+
+        relativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Animation shake = AnimationUtils.loadAnimation(ShowActivity.this, R.anim.shake);//加载动画资源文件
+                findViewById(R.id.fab).startAnimation(shake); //给组件播放动画效果
+            }
+        });
     }
 
     @Override
@@ -362,6 +378,14 @@ public class ShowActivity extends ActionBarActivity {
             //draw the note
             //clean
             ViewGroup group = (ViewGroup) findViewById(R.id.noteGroup);
+
+            group.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Animation shake = AnimationUtils.loadAnimation(ShowActivity.this, R.anim.shake);//加载动画资源文件
+                    findViewById(R.id.fab).startAnimation(shake); //给组件播放动画效果
+                }
+            });
             while(group.getChildCount() > 1){
                 group.removeViewAt(1);
             }

@@ -21,6 +21,8 @@ import com.avos.avoscloud.RequestPasswordResetCallback;
 import com.mlzc.imagenote.R;
 import com.mlzc.imagenote.utils.ProgressDialogUtil;
 
+import butterknife.ButterKnife;
+
 public class LoginActivity extends ActionBarActivity {
     public static final int LOGIN_SUCCESS=1;
     public static final int LOGIN_FAILE=2;

@@ -1,1 +1,1 @@
-include ':app', ':imagecropstretch', ':pooredit'
+include ':app', ':imagecropstretch', ':pooredit', ':onboarder'

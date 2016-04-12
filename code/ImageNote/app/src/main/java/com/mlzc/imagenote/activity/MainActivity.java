@@ -55,6 +55,7 @@ import com.squareup.picasso.Picasso;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import sun.bob.pooredit.views.Text;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -72,32 +73,24 @@ public class MainActivity extends AppCompatActivity {
     private NoteFragment selfNoteFragment;
     private static Adapter mAdapter;
     private AsyncTask task;
-    @Bind(R.id.vp)
     ViewPager mViewPager;
-    @Bind(R.id.nav_email)
     TextView navHeadText;
-    @Bind(R.id.nav_icon)
     ImageView headerImage;
-    @Bind(R.id.drawer_layout)
     DrawerLayout mDrawerLayout;
-    @Bind(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.nav_view)
     NavigationView navigationView;
-    @Bind(R.id.fab)
     FloatingActionButton fab;
     Context context;
-
+    View headerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
-        context = this;
+       context = this;
         initForFirstRun();
-        initView();
-        initListener();
-        setFragment();
+       initView();
+       initListener();
+      setFragment();
 
     }
     private void initListener() {
@@ -111,6 +104,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initView() {
+
+        mViewPager = (ViewPager)findViewById(R.id.vp);
+         mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
+        toolbar=(Toolbar)findViewById(R.id.toolbar);
+        navigationView = (NavigationView)findViewById(R.id.nav_view);
+        fab=(FloatingActionButton)findViewById(R.id.fab);
+        headerImage = (ImageView) findViewById(R.id.nav_icon);
+        navHeadText =(TextView)findViewById(R.id.nav_email);
         setSupportActionBar(toolbar);
         //初始化ActionBar
         final ActionBar ab = getSupportActionBar();

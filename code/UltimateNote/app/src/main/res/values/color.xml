@@ -3,9 +3,9 @@
     <color name="colorPrimary">#222222</color>
     <color name="textColorPrimary">#F5F5F5</color>
     <color name="windowBackground">#FFF5F5F5</color>
-    <color name="colorPrimaryDark">#BD7F00</color>
-    <color name="btnPressedDark">#a0BD7F00</color>
-    <color name="accentColor">#00BFA5</color>
+    <color name="colorPrimaryDark">#37474F</color>
+    <color name="btnPressedDark">#a0455A64</color>
+    <color name="accentColor">#99CC99</color>
     <color name="black">#111111</color>
     <color name="onboarder_bg_1">#455A64</color>
     <color name="onboarder_bg_2">#37474F</color>

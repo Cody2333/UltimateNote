@@ -51,6 +51,7 @@ public class IntroActivity extends OnboarderActivity {
     @Override
     public void onFinishButtonPressed() {
         NavigationManager.toMain(context);
+        this.finish();
     }
 
 }

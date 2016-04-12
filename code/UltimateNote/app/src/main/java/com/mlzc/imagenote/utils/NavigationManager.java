@@ -17,6 +17,5 @@ public class NavigationManager {
 
     public static void toMain(Context context){
         context.startActivity(new Intent(context, MainActivity.class));
-
     }
 }

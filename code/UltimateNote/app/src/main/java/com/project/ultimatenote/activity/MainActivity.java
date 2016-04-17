@@ -83,11 +83,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-       context = this;
+        context = this;
         initForFirstRun();
-       initView();
-       initListener();
-      setFragment();
+        initView();
+        initListener();
+        setFragment();
 
     }
     private void initListener() {

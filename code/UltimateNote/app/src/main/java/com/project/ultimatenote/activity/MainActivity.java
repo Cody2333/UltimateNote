@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -19,7 +20,6 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
-import android.os.Bundle;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -30,17 +30,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import com.avos.avoscloud.AVUser;
 import com.project.ultimatenote.MyApplication;
@@ -53,6 +42,17 @@ import com.project.ultimatenote.views.CircleTransformation;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.picasso.OkHttpDownloader;
 import com.squareup.picasso.Picasso;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -78,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navigationView;
     FloatingActionButton fab;
     Context context;
-    View headerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -265,12 +264,12 @@ public class MainActivity extends AppCompatActivity {
                                 break;
                             case R.id.nav_settings:     //弹出用户界面
                                 Intent intent = new Intent(MainActivity.this, SettingActivity.class);
-                                startActivityForResult(intent, GET_SETTING_INFO);
+                                startActivity(intent);
                                 break;
 
                             case R.id.nav_about:
                                 Intent intent1 = new Intent(MainActivity.this,TestCascadeActivity.class);
-                                startActivityForResult(intent1, GET_SETTING_INFO);
+                                startActivity(intent1);
                                 break;
 
                             case R.id.nav_logout:
@@ -311,9 +310,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         } else if (requestCode == GET_SETTING_INFO) {
-            finish();
-            Intent intent = new Intent(MainActivity.this, MainActivity.class);
-            startActivity(intent);
+
         } else if (requestCode == CREATE_NEW_NOTE) {
             finish();
             Intent intent = new Intent(MainActivity.this, MainActivity.class);

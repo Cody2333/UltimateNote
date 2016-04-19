@@ -53,9 +53,6 @@
             android:name="com.project.ultimatenote.activity.LicenseActivity"
             android:label="@string/title_activity_license"/>
         <activity
-            android:name="com.project.ultimatenote.activity.SearchableActivity"
-            android:label=""/>
-        <activity
             android:name="com.project.ultimatenote.activity.EditProfileActivity"
             android:label="@string/title_activity_edit_profile"
             android:theme="@style/AppTheme" />

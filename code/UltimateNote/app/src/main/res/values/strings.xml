@@ -28,6 +28,7 @@
     <string name="delete_local_cloud_note">delete local cloud note</string>
     <string name="nav_settings">User page</string>
     <string name="user_page">user_page</string>
+    <string name="hello">Hello World, TestCascadeActivity!</string>
     <!-- TODO: Remove or change this placeholder text -->
 
     <string name="title_activity_setting">settingActivity</string>
@@ -35,6 +36,8 @@
     <string name="title_activity_searchable">SearchableActivity</string>
     <string name="load">loading</string>
     <string name="title_activity_edit_profile">edit_profile</string>
+    <string name="title__activity_test_cascade">test_cascade</string>
+    <string name="title_activity_drawable_manager">drawable_manager</string>
 
     <string name="nav_quitlogin">logout</string>
     <string name="nav_about">about</string>

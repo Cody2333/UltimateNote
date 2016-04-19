@@ -54,12 +54,6 @@ public class SettingActivity extends ActionBarActivity {
         ab.setHomeAsUpIndicator(R.drawable.ic_back_white);
         ab.setDisplayHomeAsUpEnabled(true);
 
-        findViewById(R.id.edit_file).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(SettingActivity.this, EditProfileActivity.class));
-            }
-        });
 
         findViewById(R.id.nav_icon_new).setOnClickListener(new View.OnClickListener() {
             @Override

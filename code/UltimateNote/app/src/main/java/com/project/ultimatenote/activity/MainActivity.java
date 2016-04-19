@@ -89,6 +89,13 @@ public class MainActivity extends AppCompatActivity {
         initListener();
         setFragment();
 
+        findViewById(R.id.nav_icon).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, SettingActivity.class));
+            }
+        });
+
     }
     private void initListener() {
 
@@ -260,7 +267,10 @@ public class MainActivity extends AppCompatActivity {
                                 Intent intent = new Intent(MainActivity.this, SettingActivity.class);
                                 startActivityForResult(intent, GET_SETTING_INFO);
                                 break;
-                            default:
+
+                            case R.id.nav_about:
+                                Intent intent1 = new Intent(MainActivity.this,TestCascadeActivity.class);
+                                startActivityForResult(intent1, GET_SETTING_INFO);
                                 break;
 
                             case R.id.nav_logout:
@@ -273,6 +283,10 @@ public class MainActivity extends AppCompatActivity {
                                     }
                                 });
                                 turnToLogin();
+
+                            default:
+                                break;
+
                         }
 
                         return true;

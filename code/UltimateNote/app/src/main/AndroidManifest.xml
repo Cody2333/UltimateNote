@@ -48,17 +48,19 @@
         <activity android:name="com.abucraft.imagecropstretch.CropImageActivity" />
         <activity
             android:name="com.project.ultimatenote.activity.SettingActivity"
-            android:label="@string/title_activity_setting" />
+            android:label="@string/title_activity_setting"/>
         <activity
             android:name="com.project.ultimatenote.activity.LicenseActivity"
-            android:label="@string/title_activity_license" />
+            android:label="@string/title_activity_license"/>
         <activity
             android:name="com.project.ultimatenote.activity.SearchableActivity"
-            android:label="" />
+            android:label=""/>
         <activity
             android:name="com.project.ultimatenote.activity.EditProfileActivity"
             android:label="@string/title_activity_edit_profile"
             android:theme="@style/AppTheme" />
+        <activity android:name="com.project.ultimatenote.activity.TestCascadeActivity"
+            android:label="@string/title__activity_test_cascade"/>
     </application>
 
 </manifest>

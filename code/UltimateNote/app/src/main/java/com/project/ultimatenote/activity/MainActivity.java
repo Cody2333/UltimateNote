@@ -57,7 +57,7 @@ import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
     protected static final int GET_LOGIN_INFO = 1;
-    protected static final int GET_SETTING_INFO = 3;
+    protected static final int GET_SETTING_INFO = 5;
     protected static final int CREATE_NEW_NOTE = 2;
     public static final int SHOW_NOTE = 3;
     public static final int SHOW_OTHER_NOTE = 4;
@@ -268,7 +268,7 @@ public class MainActivity extends AppCompatActivity {
                                 break;
 
                             case R.id.nav_about:
-                                Intent intent1 = new Intent(MainActivity.this,TestCascadeActivity.class);
+                                Intent intent1 = new Intent(MainActivity.this, TestCascadeActivity.class);
                                 startActivity(intent1);
                                 break;
 
@@ -381,6 +381,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
+
         super.onActivityResult(requestCode, resultCode, data);
     }
 

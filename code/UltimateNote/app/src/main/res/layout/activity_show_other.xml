@@ -97,7 +97,7 @@ android:fitsSystemWindows="true">
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/scrollView"
+                android:id="@+id/id_note_scrollView"
                 android:layout_below="@+id/line_image"
                 android:layout_marginTop="7dp"
                 android:layout_alignParentLeft="true"

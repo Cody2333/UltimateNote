@@ -11,10 +11,10 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Bundle;
 import android.speech.RecognitionListener;
 import android.speech.SpeechRecognizer;
 import android.support.v7.app.ActionBar;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -24,12 +24,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TextView;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.Toast;
 
 import com.baidu.speech.VoiceRecognitionService;
@@ -52,30 +53,42 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 
 public class EditActivity extends AppCompatActivity implements RecognitionListener{
     static final int GET_IMAGE_FROM_OTHER = 11;
     static final int GET_OCR_RESULT = 12;
     private long cTime;
     private long rTime;
-    private EditText editText;
     private ArrayList<String> tagsArray;
     private String ocrResult;
     private Uri resultUri;
     private boolean cloudNote;
     private Context context;
     private SpeechRecognizer speechRecognizer;
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
+    @Bind(R.id.id_note_scrollView)
+    ScrollView scrollView;
+    @Bind(R.id.noteText)
+    EditText noteText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
-
+        ButterKnife.bind(this);
         context = this;
         //初始化toolbar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
+        scrollView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                noteText.requestFocus();
+            }
+        });
 
         //初始化ActionBar
         final ActionBar ab = getSupportActionBar();

@@ -55,8 +55,9 @@
                         android:id="@+id/text_title"
                         android:singleLine="true"
                         android:textColor="@color/accentColor"
-                        android:textSize="22sp"
+                        android:textSize="24sp"
                         android:hint="笔记标题"
+                        android:background="@null"
                         android:textColorHint="@color/accentColor"/>
 
                 </android.support.design.widget.TextInputLayout>
@@ -88,7 +89,7 @@
                 <ScrollView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/scrollView"
+                    android:id="@+id/id_note_scrollView"
                     android:layout_below="@+id/tableLayout"
                     android:layout_marginTop="7dp"
                     android:background="@android:color/white"
@@ -105,7 +106,10 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:id="@+id/noteText"
+                            android:layout_marginTop="4dp"
                             android:background="@null"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
                             android:hint="请输入笔记内容"
                             android:textSize="18sp"
                             android:minEms="2"

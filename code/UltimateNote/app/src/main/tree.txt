@@ -1,0 +1,220 @@
+卷 CodyWang 的文件夹 PATH 列表
+卷序列号为 0000003D 6412:DB90
+F:.
+│  AndroidManifest.xml
+│  tree.txt
+│  
+├─assets
+│  │  chi_sim.traineddata
+│  │  eng.traineddata
+│  │  
+│  └─imgs
+│          1.jpg
+│          10.jpg
+│          2.jpg
+│          3.jpg
+│          4.jpg
+│          5.jpg
+│          6.jpg
+│          7.jpg
+│          8.jpg
+│          9.jpg
+│          
+├─java
+│  └─com
+│      └─project
+│          ├─ocr
+│          │      PreProcess.java
+│          │      TessOCR.java
+│          │      
+│          └─ultimatenote
+│              │  Constant.java
+│              │  MyApplication.java
+│              │  
+│              ├─activity
+│              │      DrawableManager.java
+│              │      EditActivity.java
+│              │      EditPhotoActivity.java
+│              │      EditProfileActivity.java
+│              │      IntroActivity.java
+│              │      LicenseActivity.java
+│              │      LoginActivity.java
+│              │      MainActivity.java
+│              │      RegisterActivity.java
+│              │      SettingActivity.java
+│              │      ShowActivity.java
+│              │      ShowOtherActivity.java
+│              │      TestCascadeActivity.java
+│              │      
+│              ├─entity
+│              │      Note.java
+│              │      
+│              ├─fragment
+│              │      NoteFragment.java
+│              │      
+│              ├─utils
+│              │      ErrorAlertDialogUtil.java
+│              │      Gravatar.java
+│              │      ImageUtil.java
+│              │      NavigationManager.java
+│              │      ProgressDialogUtil.java
+│              │      ToastUtils.java
+│              │      ViewUtil.java
+│              │      
+│              └─views
+│                      CircleTransformation.java
+│                      NoteNavigationView.java
+│                      
+├─jniLibs
+│  ├─armeabi
+│  │      liblept.so
+│  │      libtess.so
+│  │      
+│  └─armeabi-v7a
+│          liblept.so
+│          libtess.so
+│          
+└─res
+    ├─anim
+    │      cycle_7.xml
+    │      shake.xml
+    │      
+    ├─drawable
+    │      ic_btn_speak_now.png
+    │      ic_launcher.png
+    │      setting_item_select_background.xml
+    │      side_nav_bar.xml
+    │      unlog.jpg
+    │      
+    ├─drawable-xhdpi
+    │      cardview_divider.9.png
+    │      head.png
+    │      planet1.png
+    │      planet2.png
+    │      planet3.png
+    │      
+    ├─drawable-xxhdpi
+    │      crop_selectable_background.xml
+    │      ic_actionbar_background.png
+    │      ic_actionbar_background_amber.png
+    │      ic_actionbar_background_indigo.png
+    │      ic_add_float_btn_amber.png
+    │      ic_add_float_btn_indigo.png
+    │      ic_add_white.png
+    │      ic_appbar.png
+    │      ic_appbar_amber.png
+    │      ic_appbar_indigo.png
+    │      ic_back_white.png
+    │      ic_btn_amber.png
+    │      ic_btn_speak_now_white.png
+    │      ic_check_white.png
+    │      ic_crop_white.png
+    │      ic_delete_amber.png
+    │      ic_delete_indigo.png
+    │      ic_delete_white.png
+    │      ic_edit_float_btn_amber.png
+    │      ic_edit_float_btn_indigo.png
+    │      ic_edit_white.png
+    │      ic_float_btn_add.png
+    │      ic_float_btn_edit.png
+    │      ic_format_bold_amber.png
+    │      ic_format_bold_indigo.png
+    │      ic_format_color_text_amber.png
+    │      ic_format_color_text_indigo.png
+    │      ic_format_text_size_amber.png
+    │      ic_format_text_size_indigo.png
+    │      ic_format_underline_amber.png
+    │      ic_format_underline_indigo.png
+    │      ic_get_app_white_24dp.png
+    │      ic_light_white.png
+    │      ic_location_small_indigo.png
+    │      ic_location_white.png
+    │      ic_more_vert_white.png
+    │      ic_note_block.png
+    │      ic_ocr_amber.png
+    │      ic_ocr_indigo.png
+    │      ic_ocr_white.png
+    │      ic_photo_size_white.png
+    │      ic_photo_white.png
+    │      ic_return_white.png
+    │      ic_search_white.png
+    │      ic_share_white.png
+    │      ic_show_bar_white.png
+    │      ic_show_block_white.png
+    │      ic_tag_small_amber.png
+    │      ic_tag_small_indigo.png
+    │      ic_tag_white.png
+    │      ic_wb_cloudy_gray_24dp.png
+    │      ic_wb_cloudy_white_24dp.png
+    │      logout4.gif
+    │      
+    ├─layout
+    │      activity_edit.xml
+    │      activity_edit_photo.xml
+    │      activity_edit_profile.xml
+    │      activity_license.xml
+    │      activity_login.xml
+    │      activity_main.xml
+    │      activity_register.xml
+    │      activity_searchable.xml
+    │      activity_setting.xml
+    │      activity_show.xml
+    │      activity_show_other.xml
+    │      custom_search_view.xml
+    │      item.xml
+    │      listview_footer.xml
+    │      main.xml
+    │      nav_header.xml
+    │      nav_header_issue.xml
+    │      note_card_view.xml
+    │      note_fragment.xml
+    │      
+    ├─menu
+    │      drawer_view.xml
+    │      menu_edit.xml
+    │      menu_edit_photo.xml
+    │      menu_license.xml
+    │      menu_login.xml
+    │      menu_main.xml
+    │      menu_register.xml
+    │      menu_searchable.xml
+    │      menu_setting.xml
+    │      menu_show.xml
+    │      menu_show_other.xml
+    │      
+    ├─mipmap-hdpi
+    │      ic_launcher.png
+    │      
+    ├─mipmap-mdpi
+    │      ic_launcher.png
+    │      
+    ├─mipmap-xhdpi
+    │      ic_launcher.png
+    │      
+    ├─mipmap-xxhdpi
+    │      ic_launcher.png
+    │      
+    ├─values
+    │      attrs_edit_image_view.xml
+    │      color.xml
+    │      dimens.xml
+    │      integers.xml
+    │      refs.xml
+    │      strings.xml
+    │      styles.xml
+    │      
+    ├─values-large
+    │      refs.xml
+    │      
+    ├─values-sw600dp
+    │      refs.xml
+    │      
+    ├─values-v21
+    │      styles.xml
+    │      
+    ├─values-w820dp
+    │      dimens.xml
+    │      
+    └─values-zh
+            strings.xml
+            

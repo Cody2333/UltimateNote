@@ -1,0 +1,41 @@
+卷 CodyWang 的文件夹 PATH 列表
+卷序列号为 00000003 6412:DB90
+F:.
+│  AndroidManifest.xml
+│  tree.txt
+│  
+├─java
+│  └─com
+│      └─abucraft
+│          └─imagecropstretch
+│                  CropImageActivity.java
+│                  CropImageView.java
+│                  FloatDrawable.java
+│                  StretchBitmap.java
+│                  StretchCropDrawable.java
+│                  
+└─res
+    ├─drawable
+    │      crop_selectable_background.xml
+    │      ic_actionbar_background_amber.png
+    │      ic_actionbar_background_indigo.png
+    │      
+    ├─drawable-xxhdpi
+    │      ic_check_white.png
+    │      ic_crop_white.png
+    │      ic_photo_size_white.png
+    │      ic_return_white.png
+    │      ic_rotate_90_degrees_ccw_white.png
+    │      ic_stretch_crop_white.png
+    │      
+    ├─layout
+    │      activity_crop_image.xml
+    │      
+    ├─values
+    │      color.xml
+    │      dimens.xml
+    │      strings.xml
+    │      
+    └─values-zh
+            strings.xml
+            

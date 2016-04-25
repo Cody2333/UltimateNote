@@ -11,7 +11,7 @@ android {
         encoding "UTF-8"
     }
     defaultConfig {
-        applicationId "com.mlzc.imagenote"
+        applicationId "com.project.ultimatenote"
         minSdkVersion 14
         targetSdkVersion 22
         versionCode 1

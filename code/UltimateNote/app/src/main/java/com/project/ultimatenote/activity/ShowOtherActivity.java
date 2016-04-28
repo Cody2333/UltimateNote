@@ -40,13 +40,13 @@ import java.util.Date;
 
 
 public class ShowOtherActivity extends ActionBarActivity {
-    private long cTime;
-    private String username;
-    private String title;
-    private ArrayList<String> tagsArray;
+    private long cTime;                    //创建时间
+    private String username;               //用户名字
+    private String title;                  //题目
+    private ArrayList<String> tagsArray;   //标题
     private Context context;
-    private Dialog waitDialog;
-    private AsyncTask task;
+    private Dialog waitDialog;             //等待对话
+    private AsyncTask task;                //任务
     private int revised;
 
     @Override

@@ -58,14 +58,14 @@ import butterknife.ButterKnife;
 
 
 public class EditActivity extends AppCompatActivity implements RecognitionListener{
-    static final int GET_IMAGE_FROM_OTHER = 11;
-    static final int GET_OCR_RESULT = 12;
-    private long cTime;
-    private long rTime;
-    private ArrayList<String> tagsArray;
-    private String ocrResult;
-    private Uri resultUri;
-    private boolean cloudNote;
+    static final int GET_IMAGE_FROM_OTHER = 11;  //图片信息
+    static final int GET_OCR_RESULT = 12;        //语音信息
+    private long cTime;                          //创建时间
+    private long rTime;                          //更改时间
+    private ArrayList<String> tagsArray;         //标签信息
+    private String ocrResult;                    //语音结果
+    private Uri resultUri;                       //结果的URI
+    private boolean cloudNote;                   //是否同步到云端
     private Context context;
     private SpeechRecognizer speechRecognizer;
     @Bind(R.id.toolbar)

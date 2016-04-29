@@ -35,7 +35,7 @@
                 android:id="@+id/text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="right|bottom"
+                android:gravity="end|bottom"
                 android:textColor="@android:color/black"
                 android:textSize="16sp"
                 android:layout_margin="@dimen/base_margin" />

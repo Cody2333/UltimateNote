@@ -10,7 +10,9 @@
     android:paddingLeft="30dp"
     android:paddingRight="30dp"
     android:paddingTop="0dp"
-    tools:context="com.project.ultimatenote.activity.LoginActivity">
+    tools:context="com.project.ultimatenote.activity.LoginActivity"
+    android:paddingEnd="30dp"
+    android:paddingStart="30dp">
 
     <ImageView
         android:layout_width="wrap_content"

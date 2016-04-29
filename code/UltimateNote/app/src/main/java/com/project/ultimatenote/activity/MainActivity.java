@@ -268,7 +268,7 @@ public class MainActivity extends AppCompatActivity {
                                 break;
 
                             case R.id.nav_about:
-                                Intent intent1 = new Intent(MainActivity.this, TestCascadeActivity.class);
+                                Intent intent1 = new Intent(MainActivity.this, LicenseActivity.class);
                                 startActivity(intent1);
                                 break;
 

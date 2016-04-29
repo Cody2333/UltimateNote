@@ -12,7 +12,8 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:paddingRight="100dp"
-        android:indeterminate="true" />
+        android:indeterminate="true"
+        android:paddingEnd="100dp" />
 
     <TextView
         android:id="@+id/pull_to_refresh_loadmore_text"
